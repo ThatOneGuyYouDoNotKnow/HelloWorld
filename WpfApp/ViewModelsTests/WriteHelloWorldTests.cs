@@ -7,14 +7,13 @@ namespace ViewModelsTests
     public class WriteHelloWorldTests
     {
         [TestMethod]
-        [Ignore]
         public void ActionTurnsTextIntoHelloWorld()
         {
             //arrange
             HelloWorldViewModel helloWorldViewModel = new HelloWorldViewModel();
 
             //act
-            helloWorldViewModel.WriteHelloWorldCommand.Execute(null);
+            helloWorldViewModel.WriteHelloWorldCommand.Execute(this);
 
             //assert
             Assert.AreEqual("Hello World", helloWorldViewModel.Text);
