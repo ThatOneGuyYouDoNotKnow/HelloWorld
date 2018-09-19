@@ -20,7 +20,6 @@ namespace PersistenceTests.PersistenceServiceTests
         }
 
         [TestMethod]
-        [Ignore]
         public void SerializableObjectAtInvalidPath_ArgumentException()
         {
             //arrange
