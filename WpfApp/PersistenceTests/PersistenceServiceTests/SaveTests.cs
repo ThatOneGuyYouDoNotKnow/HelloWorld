@@ -5,17 +5,16 @@ using Persistence;
 namespace PersistenceTests.PersistenceServiceTests
 {
     [TestClass]
-    [Ignore]
     public class SaveTests
     {
         [TestMethod]
-        public void ObjectNotJSONSerializable_InvalidOperationException()
+        public void ObjectNotJSONSerializable_ArgumentException()
         {
             //arrange
             PersistenceService persistenceService = new PersistenceService();
 
             //assert
-            Assert.ThrowsException<InvalidOperationException>(() => persistenceService.Save(new object(), "invalidPath"));
+            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new object(), "invalidPath"));
         }
     }
 }
