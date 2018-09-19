@@ -1,11 +1,12 @@
 ﻿using System.Windows.Input;
 using JetBrains.Annotations;
+using Models;
 
 namespace ViewModels
 {
-    public class HelloWorldViewModel : BaseViewModel
+    public class HelloWorldViewModel : SavableBaseViewModel<HelloWorldModel>
     {
-        public HelloWorldViewModel()
+        public HelloWorldViewModel() : base()
         {
             WriteHelloWorldCommand = new RelayCommand(WriteHelloWorld);
         }
@@ -13,7 +14,12 @@ namespace ViewModels
         [NotNull]
         public ICommand WriteHelloWorldCommand { get; }
 
-        public string Text { get; set; }
+        [NotNull]
+        public string Text
+        {
+            get => SavableModel.Text ;
+            set => SavableModel.Text = value;
+        }
 
         private void WriteHelloWorld()
         {

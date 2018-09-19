@@ -5,11 +5,14 @@ using JetBrains.Annotations;
 namespace ViewModels
 {
     public abstract class SavableBaseViewModel<T> : BaseViewModel
+        where T : new()
     {
         protected SavableBaseViewModel()
         {
             SaveCommand = new RelayCommand(Save);
             LoadCommand = new RelayCommand(Load);
+            SavableModel = new T();
+            SaveLocation = string.Empty;
         }
 
         [NotNull]
@@ -18,7 +21,11 @@ namespace ViewModels
         [NotNull]
         public ICommand LoadCommand { get; }
 
+        [NotNull]
         public string SaveLocation { get; set; }
+
+        [NotNull]
+        protected T SavableModel { get; }
 
         private void Load()
         {
