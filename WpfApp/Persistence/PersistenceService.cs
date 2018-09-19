@@ -5,7 +5,7 @@ namespace Persistence
 {
     public class PersistenceService
     {
-        public void Save([NotNull] object objectToSave)
+        public void Save([NotNull] object objectToSave, string pathToSaveTo)
         {
             throw new NotImplementedException();
         }

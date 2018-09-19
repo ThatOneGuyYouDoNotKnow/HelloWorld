@@ -15,7 +15,7 @@ namespace PersistenceTests.PersistenceServiceTests
             PersistenceService persistenceService = new PersistenceService();
 
             //assert
-            Assert.ThrowsException<InvalidOperationException>(() => persistenceService.Save(new object()));
+            Assert.ThrowsException<InvalidOperationException>(() => persistenceService.Save(new object(), "invalidPath"));
         }
     }
 }
