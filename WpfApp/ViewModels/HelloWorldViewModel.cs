@@ -6,7 +6,7 @@ namespace ViewModels
 {
     public class HelloWorldViewModel : SavableBaseViewModel<HelloWorldModel>
     {
-        public HelloWorldViewModel() : base()
+        public HelloWorldViewModel()
         {
             WriteHelloWorldCommand = new RelayCommand(WriteHelloWorld);
         }
@@ -17,7 +17,7 @@ namespace ViewModels
         [NotNull]
         public string Text
         {
-            get => SavableModel.Text ;
+            get => SavableModel.Text;
             set => SavableModel.Text = value;
         }
 
