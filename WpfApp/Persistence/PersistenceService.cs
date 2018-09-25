@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using Extensions;
 using JetBrains.Annotations;
 
@@ -11,18 +12,22 @@ namespace Persistence
     {
         public void Save([NotNull] object objectToSave, [NotNull] string pathToSaveTo)
         {
-            if (!objectToSave.GetType().GetCustomAttributes(typeof(DataContractAttribute), true).Any())
+            Type type = objectToSave.GetType();
+            if (!type.GetCustomAttributes(typeof(DataContractAttribute), true).Any())
             {
                 throw new ArgumentException(
-                    $"{objectToSave.GetType()} does not fulfill the requirement of {nameof(PersistenceService)} to posses the {nameof(DataContractAttribute)}.");
+                    $"{type} does not fulfill the requirement of {nameof(PersistenceService)} to posses the {nameof(DataContractAttribute)}.");
             }
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(type);
 
-            ValidatePath(pathToSaveTo);
-
-            throw new NotImplementedException();
+            using (FileStream stream = GetFileStream(pathToSaveTo))
+            {
+                serializer.WriteObject(stream, objectToSave);
+            }
         }
 
-        private static void ValidatePath([NotNull] string pathToSaveTo)
+        [NotNull]
+        private static FileStream GetFileStream([NotNull] string pathToSaveTo)
         {
             if (pathToSaveTo.IsNullOrEmpty())
             {
@@ -58,6 +63,8 @@ namespace Persistence
             {
                 throw new ArgumentException($"The path '{pathToSaveTo}' references a readonly file.");
             }
+
+            return fileInfo.OpenWrite();
         }
 
         [NotNull]

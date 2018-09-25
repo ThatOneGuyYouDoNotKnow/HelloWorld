@@ -59,26 +59,23 @@ namespace PersistenceTests.PersistenceServiceTests
         }
 
         [TestMethod]
-        [Ignore]
         public void SerializableObjectAtValidPath_FileCreated()
         {
             //arrange
-            const string pathToSaveTo = "validPath"; //todo: set an actually valid path
+            const string pathToSaveTo = "relativeTestFileName";
             if (File.Exists(pathToSaveTo))
             {
                 File.Delete(pathToSaveTo);
             }
 
             PersistenceService persistenceService = new PersistenceService();
+            SerializableObject objectToSave = new SerializableObject {TestString = "some text"};
 
             //act
-            persistenceService.Save(new SerializableObject(), pathToSaveTo);
+            persistenceService.Save(objectToSave, pathToSaveTo);
 
             //assert
             Assert.IsTrue(File.Exists(pathToSaveTo));
-
-            //clean
-            File.Delete(pathToSaveTo);
         }
 
         [DataContract]
