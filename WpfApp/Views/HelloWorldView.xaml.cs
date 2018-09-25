@@ -1,15 +1,27 @@
 ﻿using System.Windows;
+using ViewModels;
 
 namespace Views
 {
-    /// <summary>
-    ///     Interaction logic for HelloWorldView.xaml
-    /// </summary>
-    public partial class HelloWorldView : Window
+    public partial class HelloWorldView
     {
         public HelloWorldView()
         {
             InitializeComponent();
+            DataContext = new HelloWorldViewModel();
+        }
+
+        private void SayHelloWorldButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!(DataContext is HelloWorldViewModel viewModel) || viewModel == null)
+            {
+                return;
+            }
+
+            if (viewModel.WriteHelloWorldCommand.CanExecute(this))
+            {
+                viewModel.WriteHelloWorldCommand.Execute(this);
+            }
         }
     }
 }
