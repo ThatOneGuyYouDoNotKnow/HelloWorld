@@ -16,17 +16,46 @@ namespace PersistenceTests.PersistenceServiceTests
             PersistenceService persistenceService = new PersistenceService();
 
             //assert
-            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new object(), "invalidPath"));
+            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new object(), "path"));
         }
 
         [TestMethod]
-        public void SerializableObjectAtInvalidPath_ArgumentException()
+        public void SerializableObjectAtInvalidPath_EmptyPath_ArgumentException()
         {
             //arrange
             PersistenceService persistenceService = new PersistenceService();
 
             //assert
-            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new SerializableObject(), "invalidPath"));
+            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new SerializableObject(), ""));
+        }
+
+        [TestMethod]
+        public void SerializableObjectAtInvalidPath_InvalidPath_ArgumentException()
+        {
+            //arrange
+            PersistenceService persistenceService = new PersistenceService();
+
+            //assert
+            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new SerializableObject(), "invalidPath:"));
+        }
+
+        [TestMethod]
+        public void SerializableObjectAtInvalidPath_ReadOnlyFile_ArgumentException()
+        {
+            //arrange
+            const string pathToSaveTo = "relativeROFileName";
+            PersistenceService persistenceService = new PersistenceService();
+            if (File.Exists(pathToSaveTo))
+            {
+                File.SetAttributes(pathToSaveTo, FileAttributes.Normal);
+                File.Delete(pathToSaveTo);
+            }
+
+            File.Create(pathToSaveTo);
+            File.SetAttributes(pathToSaveTo, FileAttributes.ReadOnly);
+
+            //assert
+            Assert.ThrowsException<ArgumentException>(() => persistenceService.Save(new SerializableObject(), pathToSaveTo));
         }
 
         [TestMethod]
@@ -35,6 +64,11 @@ namespace PersistenceTests.PersistenceServiceTests
         {
             //arrange
             const string pathToSaveTo = "validPath"; //todo: set an actually valid path
+            if (File.Exists(pathToSaveTo))
+            {
+                File.Delete(pathToSaveTo);
+            }
+
             PersistenceService persistenceService = new PersistenceService();
 
             //act
@@ -42,6 +76,9 @@ namespace PersistenceTests.PersistenceServiceTests
 
             //assert
             Assert.IsTrue(File.Exists(pathToSaveTo));
+
+            //clean
+            File.Delete(pathToSaveTo);
         }
 
         [DataContract]

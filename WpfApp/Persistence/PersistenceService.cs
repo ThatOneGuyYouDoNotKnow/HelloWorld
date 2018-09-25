@@ -2,6 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization;
+using Extensions;
 using JetBrains.Annotations;
 
 namespace Persistence
@@ -12,19 +13,22 @@ namespace Persistence
         {
             if (!objectToSave.GetType().GetCustomAttributes(typeof(DataContractAttribute), true).Any())
             {
-                throw new ArgumentException($"{objectToSave} needs the {nameof(DataContractAttribute)}");
+                throw new ArgumentException(
+                    $"{objectToSave.GetType()} does not fulfill the requirement of {nameof(PersistenceService)} to posses the {nameof(DataContractAttribute)}.");
             }
 
-            if (!IsValidPath(pathToSaveTo))
-            {
-                throw new ArgumentException($"{pathToSaveTo} has to be a valid path");
-            }
+            ValidatePath(pathToSaveTo);
 
             throw new NotImplementedException();
         }
 
-        private bool IsValidPath([NotNull] string pathToSaveTo)
+        private static void ValidatePath([NotNull] string pathToSaveTo)
         {
+            if (pathToSaveTo.IsNullOrEmpty())
+            {
+                throw new ArgumentException("A path has to be specified.");
+            }
+
             FileInfo fileInfo = null;
             try
             {
@@ -40,14 +44,20 @@ namespace Persistence
             {
             }
 
-            if (fileInfo is null || fileInfo.IsReadOnly || fileInfo.DirectoryName != fileInfo.Name)
+            if (fileInfo is null)
             {
-                // file name is not valid
-                return false;
+                throw new ArgumentException($"The path '{pathToSaveTo}' is not a valid path.");
             }
 
+            if (fileInfo.DirectoryName == fileInfo.FullName)
+            {
+                throw new ArgumentException($"The path '{pathToSaveTo}' is a directory path, but a file path is needed.");
+            }
 
-            return true;
+            if (fileInfo.Exists && fileInfo.IsReadOnly)
+            {
+                throw new ArgumentException($"The path '{pathToSaveTo}' references a readonly file.");
+            }
         }
 
         [NotNull]

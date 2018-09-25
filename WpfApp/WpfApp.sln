@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Persistence", "Persistence\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceTests", "PersistenceTests\PersistenceTests.csproj", "{77AB3EAE-6CA5-4291-B760-1FBE9693B89C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -51,6 +53,10 @@ Global
 		{77AB3EAE-6CA5-4291-B760-1FBE9693B89C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{77AB3EAE-6CA5-4291-B760-1FBE9693B89C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{77AB3EAE-6CA5-4291-B760-1FBE9693B89C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
