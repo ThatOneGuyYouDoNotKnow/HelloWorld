@@ -43,6 +43,7 @@ namespace DependencyInjection
             }
         }
 
+        [NotNull]
         public static T GetInstance<T>()
             where T : class =>
             DiContainer.GetInstance<T>();

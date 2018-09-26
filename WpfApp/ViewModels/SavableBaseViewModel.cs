@@ -1,17 +1,18 @@
 ﻿using System;
 using System.Windows.Input;
+using DependencyInjection;
 using JetBrains.Annotations;
 
 namespace ViewModels
 {
     public abstract class SavableBaseViewModel<T> : BaseViewModel
-        where T : new()
+        where T : class, new()
     {
         protected SavableBaseViewModel()
         {
             SaveCommand = new RelayCommand(Save);
             LoadCommand = new RelayCommand(Load);
-            SavableModel = new T();
+            SavableModel = Locator.GetInstance<T>();
             SaveLocation = string.Empty;
         }
 

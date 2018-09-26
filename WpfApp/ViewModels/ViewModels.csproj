@@ -62,6 +62,10 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
+      <Project>{6C0B19AD-9ABB-49D1-8BED-4D1E3C101FC6}</Project>
+      <Name>DependencyInjection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Models\Models.csproj">
       <Project>{65324840-8D2A-457F-9F9B-947DF3DE49AF}</Project>
       <Name>Models</Name>

@@ -5,6 +5,7 @@ using NullGuard;
 
 namespace ViewModels
 {
+    //todo: write a CommandFactory or a CommandBuilder for di
     public class RelayCommand : ICommand
     {
         private bool _canExecute;

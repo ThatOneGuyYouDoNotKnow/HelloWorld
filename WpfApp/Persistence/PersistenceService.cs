@@ -19,6 +19,7 @@ namespace Persistence
                     $"{type} does not fulfill the requirement of {nameof(PersistenceService)} to posses the {nameof(DataContractAttribute)}.");
             }
 
+            //todo: write wrapper for DataContractJsonSerializer for di
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(type);
 
             using (FileStream stream = GetFileStream(pathToSaveTo))

@@ -1,4 +1,5 @@
-﻿using ViewModels;
+﻿using DependencyInjection;
+using ViewModels;
 
 namespace Views
 {
@@ -7,7 +8,7 @@ namespace Views
         public HelloWorldView()
         {
             InitializeComponent();
-            DataContext = new HelloWorldViewModel();
+            DataContext = Locator.GetInstance<HelloWorldViewModel>();
         }
     }
 }

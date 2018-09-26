@@ -1,7 +1,10 @@
-﻿namespace DependencyInjection
+﻿using JetBrains.Annotations;
+
+namespace DependencyInjection
 {
     public interface IDiContainer
     {
+        [NotNull]
         T GetInstance<T>()
             where T : class;
 

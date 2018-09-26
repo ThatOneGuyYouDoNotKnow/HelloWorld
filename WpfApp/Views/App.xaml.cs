@@ -19,7 +19,7 @@ namespace Views
                 throw new ApplicationException("The application has not been setup properly.");
             }
 
-            Current.MainWindow = new HelloWorldView();
+            Current.MainWindow = Locator.GetInstance<HelloWorldView>();
             Current.MainWindow.Show();
         }
     }
