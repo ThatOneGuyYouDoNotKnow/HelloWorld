@@ -1,6 +1,7 @@
 ﻿using System.Windows.Input;
 using JetBrains.Annotations;
 using Models;
+using NullGuardUnfriendly;
 
 namespace ViewModels
 {

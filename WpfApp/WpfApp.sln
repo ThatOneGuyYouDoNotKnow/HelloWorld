@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersistenceTests", "Persist
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Extensions", "Extensions\Extensions.csproj", "{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NullGuardUnfriendly", "NullGuardUnfriendly\NullGuardUnfriendly.csproj", "{7F55A462-156D-4CDE-965B-D811003EACCD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -57,6 +59,10 @@ Global
 		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27FBD46B-CDFC-4312-A6D5-823F0C5825CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F55A462-156D-4CDE-965B-D811003EACCD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F55A462-156D-4CDE-965B-D811003EACCD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F55A462-156D-4CDE-965B-D811003EACCD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F55A462-156D-4CDE-965B-D811003EACCD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

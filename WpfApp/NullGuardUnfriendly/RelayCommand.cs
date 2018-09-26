@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace ViewModels
+namespace NullGuardUnfriendly
 {
     public class RelayCommand : ICommand
     {
