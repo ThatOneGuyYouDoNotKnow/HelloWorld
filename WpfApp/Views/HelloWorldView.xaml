@@ -12,9 +12,6 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <TextBox Text="{Binding Text}" />
-        <Button x:Name="SayHelloWorldButton"
-                Content="Button"
-                Command="{Binding WriteHelloWorldCommand}"
-                Grid.Column="1" />
+        <Button x:Name="SayHelloWorldButton" Content="Button" Click="SayHelloWorldButton_OnClick" Grid.Column="1" />
     </Grid>
 </Window>
