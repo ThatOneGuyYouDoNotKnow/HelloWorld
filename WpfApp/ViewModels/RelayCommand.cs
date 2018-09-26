@@ -1,23 +1,25 @@
 ﻿using System;
 using System.Windows.Input;
+using JetBrains.Annotations;
+using NullGuard;
 
 namespace ViewModels
 {
     public class RelayCommand : ICommand
     {
         private bool _canExecute;
-        private Predicate<object> _canExecuteHandler;
-        private Action<object> _executeHandler;
+        [CanBeNull] private Predicate<object> _canExecuteHandler;
+        [CanBeNull] private Action<object> _executeHandler;
 
-        public RelayCommand(Action executeHandler) : this(x => executeHandler?.Invoke(), DefaultCanExecute)
+        public RelayCommand([CanBeNull] Action executeHandler) : this(x => executeHandler?.Invoke(), DefaultCanExecute)
         {
         }
 
-        public RelayCommand(Action<object> executeHandler) : this(executeHandler, DefaultCanExecute)
+        public RelayCommand([CanBeNull] Action<object> executeHandler) : this(executeHandler, DefaultCanExecute)
         {
         }
 
-        public RelayCommand(Action<object> executeHandler, Predicate<object> canExecuteHandler)
+        public RelayCommand([CanBeNull] Action<object> executeHandler, [CanBeNull] Predicate<object> canExecuteHandler)
         {
             _executeHandler = executeHandler;
             _canExecuteHandler = canExecuteHandler;
@@ -25,7 +27,7 @@ namespace ViewModels
 
         public event EventHandler CanExecuteChanged;
 
-        public bool CanExecute(object parameter)
+        public bool CanExecute([CanBeNull] [AllowNull] object parameter)
         {
             if (_canExecuteHandler == null)
             {
@@ -43,7 +45,7 @@ namespace ViewModels
             return _canExecute;
         }
 
-        public void Execute(object parameter)
+        public void Execute([CanBeNull] [AllowNull] object parameter)
         {
             _executeHandler?.Invoke(parameter);
         }
@@ -54,6 +56,6 @@ namespace ViewModels
             _executeHandler = _ => { };
         }
 
-        private static bool DefaultCanExecute(object parameter) => true;
+        private static bool DefaultCanExecute([CanBeNull] [AllowNull] object parameter) => true;
     }
 }
