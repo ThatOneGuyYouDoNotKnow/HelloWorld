@@ -106,6 +106,10 @@
     <Resource Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DependencyInjection\DependencyInjection.csproj">
+      <Project>{6C0B19AD-9ABB-49D1-8BED-4D1E3C101FC6}</Project>
+      <Name>DependencyInjection</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ViewModels\ViewModels.csproj">
       <Project>{7445C488-DB3D-4C64-8657-747A3EB013BE}</Project>
       <Name>ViewModels</Name>

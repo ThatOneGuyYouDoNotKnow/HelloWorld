@@ -1,11 +1,26 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
+using DependencyInjection;
 
 namespace Views
 {
     /// <summary>
     ///     Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class App
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+            Locator.RegisterPackages();
+
+            if (Current == null)
+            {
+                throw new ApplicationException("The application has not been setup properly.");
+            }
+
+            Current.MainWindow = new HelloWorldView();
+            Current.MainWindow.Show();
+        }
     }
 }

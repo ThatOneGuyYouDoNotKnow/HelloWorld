@@ -18,6 +18,7 @@ namespace Persistence
                 throw new ArgumentException(
                     $"{type} does not fulfill the requirement of {nameof(PersistenceService)} to posses the {nameof(DataContractAttribute)}.");
             }
+
             DataContractJsonSerializer serializer = new DataContractJsonSerializer(type);
 
             using (FileStream stream = GetFileStream(pathToSaveTo))
