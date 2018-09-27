@@ -9,13 +9,20 @@ namespace DependencyInjection
     public static class Locator
     {
         [NotNull]
-        private static IDiContainer DiContainer { get; } = new DiContainer();
+        private static IDiContainer DiContainer { get; set; } = new DiContainer();
 
-        public static void Register<TInterface, TType>()
+        public static void RegisterTransient<TInterface, TType>()
             where TInterface : class
             where TType : class, TInterface
         {
-            DiContainer.Register<TInterface, TType>();
+            DiContainer.RegisterTransient<TInterface, TType>();
+        }
+
+        public static void RegisterScoped<TInterface, TType>()
+            where TInterface : class
+            where TType : class, TInterface
+        {
+            DiContainer.RegisterScoped<TInterface, TType>();
         }
 
         public static void RegisterSingleton<TInterface, TType>()
@@ -71,5 +78,11 @@ namespace DependencyInjection
         public static T GetInstance<T>()
             where T : class =>
             DiContainer.GetInstance<T>();
+
+        //todo: this ist for UnitTest-use only and if a better solution is found it should be removed.
+        internal static void ResetContainer()
+        {
+            DiContainer = new DiContainer();
+        }
     }
 }
