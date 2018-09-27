@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using JetBrains.Annotations;
 
 namespace DependencyInjection
@@ -29,6 +30,8 @@ namespace DependencyInjection
         /// </summary>
         public static void RegisterPackages()
         {
+            LoadAllAssemblies();
+
             IEnumerable<Type> diContainerPackages = AppDomain.CurrentDomain.GetAssemblies().SelectMany(assembly =>
                 assembly.GetTypes().Where(type => typeof(IDependencyInjectionPackage).IsAssignableFrom(type)));
             foreach (Type diContainerPackageType in diContainerPackages)
@@ -38,8 +41,29 @@ namespace DependencyInjection
                     continue;
                 }
 
-                IDependencyInjectionPackage diContainerPackage = (IDependencyInjectionPackage) Activator.CreateInstance(diContainerPackageType);
-                diContainerPackage.Register(DiContainer);
+                ((IDependencyInjectionPackage) Activator.CreateInstance(diContainerPackageType)).Register(DiContainer);
+            }
+        }
+
+        private static void LoadAllAssemblies()
+        {
+            foreach (Assembly assembly in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                LoadReferencedAssemblies(assembly);
+            }
+        }
+
+        private static void LoadReferencedAssemblies([NotNull] Assembly parentAssembly)
+        {
+            foreach (AssemblyName assemblyName in parentAssembly.GetReferencedAssemblies())
+            {
+                if (AppDomain.CurrentDomain.GetAssemblies().Any(a => a?.FullName == assemblyName.FullName))
+                {
+                    continue;
+                }
+
+                Assembly assembly = AppDomain.CurrentDomain.Load(assemblyName);
+                LoadReferencedAssemblies(assembly);
             }
         }
 

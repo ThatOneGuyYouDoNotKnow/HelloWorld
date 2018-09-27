@@ -10,7 +10,7 @@ namespace ViewModelsTests
         public void ActionTurnsTextIntoHelloWorld()
         {
             //arrange
-            HelloWorldViewModel helloWorldViewModel = new HelloWorldViewModel();
+            HelloWorldViewModel helloWorldViewModel = new HelloWorldViewModel(new CommandFactory());
 
             //act
             helloWorldViewModel.WriteHelloWorldCommand.Execute(this);

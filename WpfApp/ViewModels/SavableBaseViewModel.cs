@@ -8,10 +8,10 @@ namespace ViewModels
     public abstract class SavableBaseViewModel<T> : BaseViewModel
         where T : class, new()
     {
-        protected SavableBaseViewModel()
+        protected SavableBaseViewModel([NotNull] ICommandFactory commandFactory)
         {
-            SaveCommand = new RelayCommand(Save);
-            LoadCommand = new RelayCommand(Load);
+            SaveCommand = commandFactory.CreateRelayCommand(Save);
+            LoadCommand = commandFactory.CreateRelayCommand(Load);
             SavableModel = Locator.GetInstance<T>();
             SaveLocation = string.Empty;
         }

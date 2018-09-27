@@ -1,7 +1,9 @@
-﻿namespace DependencyInjection
+﻿using JetBrains.Annotations;
+
+namespace DependencyInjection
 {
     public interface IDependencyInjectionPackage
     {
-        void Register(IDiContainer diContainer);
+        void Register([NotNull] IDiContainer diContainer);
     }
 }

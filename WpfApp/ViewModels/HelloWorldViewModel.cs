@@ -6,9 +6,9 @@ namespace ViewModels
 {
     public class HelloWorldViewModel : SavableBaseViewModel<HelloWorldModel>
     {
-        public HelloWorldViewModel()
+        public HelloWorldViewModel([NotNull] ICommandFactory commandFactory) : base(commandFactory)
         {
-            WriteHelloWorldCommand = new RelayCommand(WriteHelloWorld);
+            WriteHelloWorldCommand = commandFactory.CreateRelayCommand(WriteHelloWorld);
         }
 
         [NotNull]

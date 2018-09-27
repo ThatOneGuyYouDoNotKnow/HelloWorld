@@ -5,22 +5,13 @@ using NullGuard;
 
 namespace ViewModels
 {
-    //todo: write a CommandFactory or a CommandBuilder for di
-    public class RelayCommand : ICommand
+    internal class RelayCommand : ICommand
     {
         private bool _canExecute;
         [CanBeNull] private Predicate<object> _canExecuteHandler;
         [CanBeNull] private Action<object> _executeHandler;
 
-        public RelayCommand([CanBeNull] Action executeHandler) : this(x => executeHandler?.Invoke(), DefaultCanExecute)
-        {
-        }
-
-        public RelayCommand([CanBeNull] Action<object> executeHandler) : this(executeHandler, DefaultCanExecute)
-        {
-        }
-
-        public RelayCommand([CanBeNull] Action<object> executeHandler, [CanBeNull] Predicate<object> canExecuteHandler)
+        internal RelayCommand([CanBeNull] Action<object> executeHandler, [CanBeNull] Predicate<object> canExecuteHandler)
         {
             _executeHandler = executeHandler;
             _canExecuteHandler = canExecuteHandler;
@@ -56,7 +47,5 @@ namespace ViewModels
             _canExecuteHandler = _ => false;
             _executeHandler = _ => { };
         }
-
-        private static bool DefaultCanExecute([CanBeNull] [AllowNull] object parameter) => true;
     }
 }
